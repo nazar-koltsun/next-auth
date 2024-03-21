@@ -1,7 +1,7 @@
 import { FaCheck } from "react-icons/fa";
 
 interface FormSuccessProps {
-  message: string;
+  message: string | undefined;
 }
 
 const FormSuccess = ({ message }: FormSuccessProps) => {
