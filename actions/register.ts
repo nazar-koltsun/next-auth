@@ -1,5 +1,6 @@
 'use server';
 
+import prismadb from '@/prismadb';
 import { z } from 'zod';
 import { registerFormSchema } from '@/schemas';
 
@@ -10,5 +11,12 @@ export const register = async (values: z.infer<typeof registerFormSchema>) => {
     return { error: 'Invalid fields' };
   }
 
-  return { succes: 'Email sent!' };
+  const user = await prismadb.user.create({
+    data: {
+      name: values.name,
+      email: values.email,
+    },
+  });
+
+  return { succes: 'New user registered!', user };
 };
